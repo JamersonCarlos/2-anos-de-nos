@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2 Anos de Nós</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;700&family=Caveat:wght@400;600&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: mar ao entardecer no topo, descendo para o mar profundo (linha do tempo) e a noite (contagem e carta). Tema único, escolhido de propósito. */
+:root{
+  --mar:#0b3d5c; --mar-fundo:#072a40; --noite:#04121d;
+  --rosa:#ff6b9d; --coracao:#e63946; --dourado:#f4c95d; --creme:#fff8f0;
+  --tinta:#3b2a2a; --papel:#fffaf2; --branco:#ffffff;
+  --texto-suave:rgba(255,248,240,.78);
+  --f-titulo:"Great Vibes","Dancing Script",cursive;
+  --f-sub:"Dancing Script","Brush Script MT",cursive;
+  --f-mao:"Caveat","Dancing Script",cursive;
+  --f-corpo:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--mar);color:var(--creme);font-family:var(--f-corpo);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:400}
+button{font:inherit;cursor:pointer}
+button:focus-visible,img:focus-visible{outline:3px solid var(--dourado);outline-offset:3px}
+
+/* ---------- corações ---------- */
+.heart svg{display:block;width:100%;height:100%}
+#bg-hearts,#fx-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#bg-hearts{z-index:2}
+#fx-layer{z-index:200}
+.float{position:absolute;bottom:-40px;animation:subir var(--d) linear forwards;opacity:var(--o)}
+.float .heart{animation:balanca 3s ease-in-out infinite alternate}
+@keyframes subir{to{transform:translateY(calc(-100vh - 80px))}}
+@keyframes balanca{from{transform:translateX(-12px) rotate(-8deg)}to{transform:translateX(12px) rotate(8deg)}}
+.pop{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);animation:estoura var(--d,900ms) cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes estoura{0%{transform:translate(0,0) scale(.3) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1) rotate(var(--rot));opacity:0}}
+.fall{position:absolute;top:-40px;animation:cair var(--d) linear forwards;opacity:var(--o)}
+@keyframes cair{to{transform:translateY(calc(100vh + 80px)) rotate(var(--rot))}}
+
+/* ---------- abertura ---------- */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(180deg,#0b3d5c 0%,#3b4f7a 30%,#c06a92 58%,#ff8a9d 74%,#f4c95d 100%);overflow:hidden;padding-block:72px 140px}
+.sol{position:absolute;left:50%;bottom:110px;width:min(70vw,360px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,170,.95) 0%,rgba(244,201,93,.55) 40%,rgba(244,201,93,0) 70%)}
+.hero-in{position:relative;z-index:3;display:grid;gap:14px;justify-items:center;max-width:720px}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.32em;text-transform:uppercase;color:var(--creme);opacity:.85}
+.hero h1{font-family:var(--f-titulo);font-size:clamp(4rem,19vw,9rem);line-height:1;color:var(--creme);text-shadow:0 4px 30px rgba(11,61,92,.45);padding-inline:.15em}
+.hero h1 .l{display:inline-block;opacity:0;transform:translateY(.25em);filter:blur(6px);animation:letra .7s ease forwards;animation-delay:calc(var(--i)*90ms + 200ms)}
+.hero h1 .sp{display:inline-block;width:.25em}
+@keyframes letra{to{opacity:1;transform:none;filter:none}}
+.hero .sub{font-family:var(--f-sub);font-size:clamp(1.35rem,5.4vw,2rem);line-height:1.3;max-width:24ch;opacity:0;animation:aparece 1s ease 1.5s forwards}
+.hero .data{font-family:var(--f-mao);font-size:1.6rem;color:var(--mar);background:rgba(255,248,240,.85);padding:2px 18px;border-radius:999px;opacity:0;animation:aparece 1s ease 2s forwards;font-variant-numeric:tabular-nums}
+@keyframes aparece{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.seta{position:absolute;z-index:3;left:50%;bottom:calc(36px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:grid;justify-items:center;gap:4px;color:var(--creme);text-decoration:none;font-family:var(--f-mao);font-size:1.35rem;opacity:0;animation:aparece 1s ease 2.6s forwards}
+.seta svg{width:28px;height:28px;animation:pulsa-seta 1.6s ease-in-out infinite}
+@keyframes pulsa-seta{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(8px);opacity:1}}
+.ondas{position:absolute;left:0;right:0;bottom:-1px;height:120px;z-index:2;pointer-events:none}
+.ondas svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+.ondas .o1{animation:onda 14s linear infinite;opacity:.45}
+.ondas .o2{animation:onda 9s linear infinite reverse;opacity:.7}
+.ondas .o3{animation:onda 18s linear infinite}
+@keyframes onda{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- linha do tempo ---------- */
+.memorias{position:relative;z-index:3;background:linear-gradient(180deg,var(--mar) 0%,var(--mar-fundo) 70%,var(--noite) 100%);padding-block:40px 120px;overflow-x:clip}
+.sec-head{text-align:center;display:grid;gap:6px;margin-bottom:28px}
+.sec-head h2{font-family:var(--f-titulo);font-size:clamp(2.6rem,10vw,4rem);color:var(--rosa)}
+.sec-head p{margin:0;color:var(--texto-suave)}
+.tl{position:relative;max-width:1040px;margin:0 auto}
+.mem{position:relative;display:grid;grid-template-columns:1fr;gap:18px;padding:34px 0 34px 46px}
+.mem::before{content:"";position:absolute;left:17px;top:0;bottom:0;width:2px;border-radius:2px;
+  background:linear-gradient(var(--rosa),var(--dourado));transform-origin:top;transform:scaleY(0);transition:transform 1.1s ease}
+.mem.in::before,.no-anim .mem::before{transform:scaleY(1)}
+.mem .marca{position:absolute;left:6px;top:54px;width:24px;height:22px;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .3s;filter:drop-shadow(0 0 8px rgba(255,107,157,.7))}
+.mem.in .marca,.no-anim .marca{transform:scale(1)}
+.foto-wrap{perspective:1200px;min-width:0}
+.pol{background:var(--branco);padding:10px 10px 46px;border-radius:3px;box-shadow:0 18px 40px rgba(0,0,0,.35),0 3px 8px rgba(0,0,0,.25);transform:rotate(var(--r));max-width:420px;margin:0 auto;position:relative;cursor:zoom-in}
+.pol img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;background:#e9e2da;max-width:100%}
+.pol .leg{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-family:var(--f-mao);font-size:1.45rem;color:var(--tinta);line-height:1.2}
+.txt{display:grid;gap:6px;align-content:center;min-width:0;max-width:440px}
+.txt .quando{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dourado);font-weight:800}
+.txt h3{font-family:var(--f-sub);font-weight:700;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15;color:var(--creme)}
+.txt p{margin:0;color:var(--texto-suave);font-size:1.02rem}
+.txt p.ph{font-style:italic;opacity:.55}
+
+/* estados iniciais (só quando há JS e movimento) */
+.js .mem:not(.in) .anim{opacity:0}
+.js .mem:not(.in) .txt > *{opacity:0;transform:translateY(18px)}
+.mem.in .txt > *{transition:opacity .7s ease,transform .7s ease;transition-delay:calc(.75s + var(--k)*.15s)}
+.mem.in .fx0 .anim{animation:fx-blur 1.3s ease both}
+.mem.in .fx1 .anim{animation:fx-polaroid 1.1s cubic-bezier(.2,.8,.25,1) both}
+.mem.in .fx2 .anim{animation:fx-cortina 1.2s cubic-bezier(.7,0,.3,1) both}
+.mem.in .fx3 .anim{animation:fx-carta 1.2s cubic-bezier(.3,.9,.3,1) both}
+@keyframes fx-blur{from{opacity:0;filter:blur(16px);transform:scale(1.12)}to{opacity:1;filter:none;transform:none}}
+@keyframes fx-polaroid{from{opacity:0;transform:translateX(var(--from,-110%)) rotate(-24deg)}to{opacity:1;transform:none}}
+@keyframes fx-cortina{from{clip-path:inset(0 50% 0 50%);opacity:.3}to{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes fx-carta{from{opacity:0;transform:rotateY(-100deg)}60%{opacity:1}to{opacity:1;transform:none}}
+
+@media (min-width:820px){
+  .tl::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:rgba(255,248,240,.08)}
+  .mem{grid-template-columns:1fr 1fr;gap:96px;padding:56px 0}
+  .mem::before{left:50%;margin-left:-1px}
+  .mem .marca{left:50%;margin-left:-12px;top:50%}
+  .mem:nth-child(even) .foto-wrap{order:2}
+  .mem:nth-child(odd) .txt{justify-self:start}
+  .mem:nth-child(even) .txt{justify-self:end;text-align:right}
+  .mem:nth-child(even){--from:110%}
+  .pol{max-width:380px}
+}
+
+/* ---------- contagem ---------- */
+.final{position:relative;z-index:3;background:radial-gradient(ellipse at 50% 0%,#0d2c44 0%,var(--noite) 60%);min-height:100svh;padding-block:100px 120px;text-align:center;display:grid;align-content:center;justify-items:center;gap:28px}
+.final .intro{font-family:var(--f-sub);font-size:clamp(2rem,8vw,3.2rem);color:var(--creme);opacity:0;transition:opacity 1.2s ease,transform 1.2s ease;transform:translateY(16px)}
+.final.go .intro{opacity:1;transform:none}
+.num{font-family:var(--f-titulo);font-size:clamp(9rem,45vw,16rem);line-height:1;color:var(--rosa);text-shadow:0 0 40px rgba(255,107,157,.6);height:1.05em;font-variant-numeric:tabular-nums}
+.num span{display:inline-block;animation:pulsa-num 1s ease both}
+@keyframes pulsa-num{0%{transform:scale(2.2);opacity:0}25%{opacity:1}55%{transform:scale(.92)}75%{transform:scale(1.06)}100%{transform:scale(1);opacity:.9}}
+.contador{display:grid;gap:26px;justify-items:center;width:100%;max-width:860px}
+.contador[hidden]{display:none!important}
+.contador.show{animation:aparece 1s ease both}
+.contador h2{font-family:var(--f-titulo);font-size:clamp(2.6rem,11vw,4.4rem);color:var(--dourado);line-height:1.1}
+.unidades{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+.u{background:rgba(255,248,240,.06);border:1px solid rgba(255,248,240,.12);border-radius:16px;padding:14px 6px 10px;display:grid;gap:2px}
+.u b{font-size:clamp(2rem,9vw,3.2rem);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--creme)}
+.u small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rosa);font-weight:600}
+@media (min-width:720px){.unidades{grid-template-columns:repeat(6,1fr)}}
+.extras{display:grid;gap:10px;font-family:var(--f-mao);font-size:1.6rem;line-height:1.3;color:var(--texto-suave)}
+.extras strong{color:var(--dourado);font-family:var(--f-corpo);font-size:1.25rem;font-weight:800;font-variant-numeric:tabular-nums;margin-right:4px}
+.btn-msg{margin-top:12px;display:inline-flex;align-items:center;gap:12px;border:0;border-radius:999px;padding:18px 34px;font-weight:800;font-size:1.2rem;color:var(--branco);
+  background:linear-gradient(135deg,var(--rosa),var(--coracao));box-shadow:0 10px 30px rgba(230,57,70,.45),0 0 0 0 rgba(255,107,157,.6);animation:anel 2s ease-out infinite}
+.btn-msg .heart{width:24px;height:22px;animation:bate 1.1s ease-in-out infinite}
+@keyframes bate{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+@keyframes anel{0%{box-shadow:0 10px 30px rgba(230,57,70,.45),0 0 0 0 rgba(255,107,157,.55)}100%{box-shadow:0 10px 30px rgba(230,57,70,.45),0 0 0 22px rgba(255,107,157,0)}}
+.btn-msg:active{transform:scale(.97)}
+
+/* ---------- carta ---------- */
+.carta-ov{position:fixed;inset:0;z-index:150;background:rgba(4,18,29,.92);display:grid;place-items:center;opacity:0;transition:opacity .5s ease}
+.carta-ov.open{opacity:1}
+.envelope{position:relative;width:min(84vw,340px);aspect-ratio:3/2;transition:transform .6s ease,opacity .6s ease}
+.env-corpo{position:absolute;inset:0;background:#f3d6c6;border-radius:6px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.env-frente{position:absolute;inset:0;border-radius:6px;background:linear-gradient(to top right,#efc7b4 50%,transparent 50.5%) left/50.5% 100% no-repeat,linear-gradient(to top left,#ebc0ac 50%,transparent 50.5%) right/50.5% 100% no-repeat;z-index:3}
+.env-aba{position:absolute;left:0;right:0;top:0;height:62%;background:#e8b8a3;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s ease;z-index:4}
+.env-selo{position:absolute;left:50%;top:50%;width:46px;height:42px;margin:-30px 0 0 -23px;z-index:5;transition:opacity .3s}
+.env-papel{position:absolute;left:8%;right:8%;top:8%;height:80%;background:var(--papel);border-radius:3px;z-index:2;transition:transform .9s cubic-bezier(.3,.9,.3,1);padding:14px;font-family:var(--f-mao);color:var(--tinta);font-size:1.3rem}
+.envelope.abrindo .env-aba{transform:rotateX(180deg);z-index:1}
+.envelope.abrindo .env-selo{opacity:0}
+.envelope.saindo .env-papel{transform:translateY(-70%)}
+.envelope.some{opacity:0;transform:scale(.8) translateY(30px)}
+.folha{position:fixed;inset:0;z-index:160;background:var(--papel);color:var(--tinta);overflow-y:auto;-webkit-overflow-scrolling:touch;opacity:0;transform:translateY(40px) scale(.97);transition:opacity .8s ease,transform .8s ease;
+  background-image:repeating-linear-gradient(transparent 0 37px,rgba(11,61,92,.08) 37px 38px);padding-block:calc(70px + env(safe-area-inset-top,0px)) calc(60px + env(safe-area-inset-bottom,0px))}
+.folha.open{opacity:1;transform:none}
+.folha-in{max-width:620px;margin:0 auto;font-family:var(--f-mao);font-size:clamp(1.45rem,5.6vw,1.75rem);line-height:1.45;display:grid;gap:18px}
+.folha-in h2{font-family:var(--f-titulo);font-size:clamp(2.6rem,11vw,3.6rem);color:var(--coracao);line-height:1.1}
+.folha-in p{margin:0;opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s ease;white-space:pre-line}
+.folha-in p.vis{opacity:1;transform:none}
+.folha-in p.ph{color:#9a8a80}
+.assinatura{text-align:right;font-weight:600}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;opacity:0;transition:opacity 1s ease}
+.acoes.vis{opacity:1}
+.acoes button{border-radius:999px;padding:12px 26px;font-family:var(--f-corpo);font-weight:800;font-size:1rem;border:2px solid var(--coracao);background:transparent;color:var(--coracao)}
+.acoes button.pri{background:var(--coracao);color:var(--branco)}
+.fechar-x{position:fixed;z-index:170;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(59,42,42,.08);color:var(--tinta);font-size:1.5rem;line-height:1}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:180;background:rgba(4,18,29,.94);display:grid;place-items:center;padding:24px;opacity:0;transition:opacity .3s ease;cursor:zoom-out}
+.lb.open{opacity:1}
+.lb img{max-width:100%;max-height:82vh;border:8px solid var(--branco);border-bottom-width:40px;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:scale(.9);transition:transform .35s ease}
+.lb.open img{transform:none}
+.lb p{margin:10px 0 0;text-align:center;font-family:var(--f-mao);font-size:1.5rem;color:var(--creme)}
+
+.musica{position:fixed;z-index:120;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,248,240,.3);background:rgba(11,61,92,.7);backdrop-filter:blur(6px);font-size:1.3rem}
+.musica.tocando{animation:bate 1.4s ease-in-out infinite}
+
+.rodape{position:relative;z-index:3;background:var(--noite);text-align:center;padding-block:0 40px;font-family:var(--f-mao);font-size:1.3rem;color:rgba(255,248,240,.5)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .hero h1 .l,.hero .sub,.hero .data,.seta{opacity:1!important;transform:none!important;filter:none!important}
+}
+</style>
+
+</head>
+<body>
+<div id="bg-hearts" aria-hidden="true"></div>
+<div id="fx-layer" aria-hidden="true"></div>
+
+<header class="hero gutter" id="topo">
+  <div class="sol" aria-hidden="true"></div>
+  <div class="hero-in">
+    <span class="eyebrow">Para o amor da minha vida</span>
+    <h1 id="titulo" aria-label="2 Anos de Nós"></h1>
+    <p class="sub" id="subtitulo"></p>
+    <span class="data" id="data-casamento"></span>
+  </div>
+  <a class="seta" href="#memorias">role para relembrar
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
+  <div class="ondas" aria-hidden="true">
+    <svg class="o1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path fill="#0b3d5c" d="M0 60 Q360 10 720 60 T1440 60 T2160 60 T2880 60 V120 H0Z"/></svg>
+    <svg class="o2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path fill="#0b3d5c" d="M0 75 Q360 30 720 75 T1440 75 T2160 75 T2880 75 V120 H0Z"/></svg>
+    <svg class="o3" viewBox="0 0 2880 120" preserveAspectRatio="none"><path fill="#0b3d5c" d="M0 92 Q360 62 720 92 T1440 92 T2160 92 T2880 92 V120 H0Z"/></svg>
+  </div>
+</header>
+
+<main>
+  <section class="memorias gutter" id="memorias">
+    <div class="sec-head">
+      <h2>Nosso último ano</h2>
+      <p>De um aniversário ao outro, uma maré de lembranças.</p>
+    </div>
+    <div class="tl" id="timeline"></div>
+  </section>
+
+  <section class="final gutter" id="final">
+    <p class="intro">E tudo isso cabe em...</p>
+    <div class="num" id="num" aria-live="polite"></div>
+    <div class="contador" id="contador" hidden>
+      <h2>2 anos de nós</h2>
+      <div class="unidades">
+        <div class="u"><b id="c-anos">0</b><small>anos</small></div>
+        <div class="u"><b id="c-meses">0</b><small>meses</small></div>
+        <div class="u"><b id="c-dias">0</b><small>dias</small></div>
+        <div class="u"><b id="c-horas">0</b><small>horas</small></div>
+        <div class="u"><b id="c-min">0</b><small>minutos</small></div>
+        <div class="u"><b id="c-seg">0</b><small>segundos</small></div>
+      </div>
+      <div class="extras">
+        <div><strong id="x-dias">0</strong> dias juntos</div>
+        <div><strong id="x-fotos">0</strong> fotos nesta página</div>
+        <div><strong>∞</strong> motivos para continuar</div>
+      </div>
+      <button class="btn-msg" id="btn-msg" type="button"><span class="heart" data-heart="#ffffff"></span>Ver mensagem 💌</button>
+    </div>
+  </section>
+</main>
+<footer class="rodape gutter">feito com amor, do mar para você</footer>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO — edite aqui
+   ===================================================================== */
+const CONFIG = {
+  titulo: "2 Anos de Nós",
+  subtitulo: "Um ano inteiro de momentos que guardo no coração",
+  dataCasamento: "2024-11-08T00:00:00", // ano-mês-dia
+  musica: "" // ex.: "musica.mp3" (arquivo ao lado do index.html). Vazio = sem botão de música.
+};
+
+// Ordem cronológica. "comentario" com [escreva aqui] aparece como rascunho até você trocar.
+const MEMORIAS = [
+  { foto: "fotos/01.jpg", data: "Novembro 2025",  titulo: "Nosso 1º aniversário",      comentario: "[escreva aqui]" },
+  { foto: "fotos/02.jpg", data: "Dezembro 2025",  titulo: "Arrumados para celebrar",   comentario: "[escreva aqui]" },
+  { foto: "fotos/03.jpg", data: "Dezembro 2025",  titulo: "Réveillon de branco",       comentario: "[escreva aqui]" },
+  { foto: "fotos/04.jpg", data: "Janeiro 2026",   titulo: "Primeiro dia do ano",       comentario: "[escreva aqui]" },
+  { foto: "fotos/05.jpg", data: "Janeiro 2026",   titulo: "Sorrisos de janeiro",       comentario: "[escreva aqui]" },
+  { foto: "fotos/06.jpg", data: "Fevereiro 2026", titulo: "Uma noite de gala",         comentario: "[escreva aqui]" },
+  { foto: "fotos/07.jpg", data: "Fevereiro 2026", titulo: "Carnaval juntos",           comentario: "[escreva aqui]" },
+  { foto: "fotos/08.jpg", data: "Fevereiro 2026", titulo: "Ainda é Carnaval",          comentario: "[escreva aqui]" },
+  { foto: "fotos/09.jpg", data: "Fevereiro 2026", titulo: "Um vinho a dois",           comentario: "[escreva aqui]" },
+  { foto: "fotos/10.jpg", data: "Abril 2026",     titulo: "Passeio de domingo",        comentario: "[escreva aqui]" },
+  { foto: "fotos/11.jpg", data: "Abril 2026",     titulo: "Jantar de abril",           comentario: "[escreva aqui]" },
+  { foto: "fotos/12.jpg", data: "Junho 2026",     titulo: "Dia de sol",                comentario: "[escreva aqui]" },
+  { foto: "fotos/13.jpg", data: "Junho 2026",     titulo: "Torcendo pelo Brasil",      comentario: "[escreva aqui]" },
+  { foto: "fotos/14.jpg", data: "Junho 2026",     titulo: "De azul também vale",       comentario: "[escreva aqui]" },
+  { foto: "fotos/15.jpg", data: "Junho 2026",     titulo: "Almoço a dois",             comentario: "[escreva aqui]" },
+  { foto: "fotos/16.jpg", data: "Junho 2026",     titulo: "Prontos para sair",         comentario: "[escreva aqui]" },
+  { foto: "fotos/17.jpg", data: "Julho 2026",     titulo: "Minha torcedora favorita",  comentario: "[escreva aqui]" },
+  { foto: "fotos/18.jpg", data: "Julho 2026",     titulo: "Rumo ao hexa",              comentario: "[escreva aqui]" },
+  { foto: "fotos/19.jpg", data: "Julho 2026",     titulo: "Lembra de um ano atrás?",   comentario: "[escreva aqui]" },
+  { foto: "fotos/20.jpg", data: "Julho 2026",     titulo: "Noite especial",            comentario: "[escreva aqui]" },
+  { foto: "fotos/21.jpg", data: "Julho 2026",     titulo: "Fim de tarde",              comentario: "[escreva aqui]" },
+  { foto: "fotos/22.jpg", data: "Julho 2026",     titulo: "Momentos em família",       comentario: "[escreva aqui]" },
+  { foto: "fotos/23.jpg", data: "Julho 2026",     titulo: "Mais um sorriso seu",       comentario: "[escreva aqui]" },
+  { foto: "fotos/24.jpg", data: "Agosto 2026",    titulo: "Noites leves",              comentario: "[escreva aqui]" },
+  { foto: "fotos/25.jpg", data: "Agosto 2026",    titulo: "Mergulho a dois",           comentario: "[escreva aqui]" },
+  { foto: "fotos/26.jpg", data: "Agosto 2026",    titulo: "Lado a lado",               comentario: "[escreva aqui]" },
+  { foto: "fotos/27.jpg", data: "Setembro 2026",  titulo: "Minha paisagem favorita",   comentario: "[escreva aqui]" },
+  { foto: "fotos/28.jpg", data: "Setembro 2026",  titulo: "Um abraço que é casa",      comentario: "[escreva aqui]" },
+  { foto: "fotos/29.jpg", data: "2026",           titulo: "Um encontro bonito",        comentario: "[escreva aqui]" }
+];
+
+// A carta: cole o seu texto exatamente como quiser, um item por parágrafo.
+const CARTA = {
+  saudacao: "",   // vazio = sem saudação extra (a carta abaixo é o texto original, sem alterações)
+  paragrafos: [
+    "Começo dizendo que nunca imaginei viver tão feliz ao lado de alguém. Hoje faz 2 anos que, diante do Senhor, escolhi eternizar a minha vida ao lado de uma só mulher. Deus nos dá o dom da vida para que sejamos felizes e eternamente gratos por tudo o que Ele realiza em nós.",
+    "Confesso que, neste último ano, enfrentei dilúvios de dificuldades: ansiedades, anseios, aflições, mágoas, baixa autoestima e tantos outros males que me afetaram. Mesmo assim, só tenho a agradecer, porque em nenhum momento você me abandonou. Por mais difíceis que fossem algumas situações, você sempre foi a esposa que nunca me deixou sozinho. Sempre disposta a fazer de tudo pelo nosso casamento, a ponto de enfrentar seus medos, seus traumas e seus gatilhos para ser uma esposa que acolhe, que luta e que escolhe amar, mesmo quando tudo parece dizer o contrário.",
+    "Quero te dizer que tenho minhas fraquezas e meus defeitos, mas estou sempre disposto a ser mais forte para ver o nosso casamento se eternizar. Quero te dizer que, mesmo no silêncio, eu te amo. Mesmo nas horas de aflição, eu te amo. Mesmo distante, eu te amo ainda mais. Mesmo quando você não olha pra mim e fica no seu cantinho, eu te amo mil vezes. E mesmo quando você está emburrada comigo, eu ainda te amo. Porque o meu amor sempre vai ser seu, independente de qualquer condição ou realidade. Vou te honrar até o fim da minha vida, vou cuidar de você e te escolher antes de mim, todos os dias.",
+    "Estamos perto de duas grandes conquistas no nosso casamento: a nossa casa e o nosso carro (um Fusca, kkkk). Que Deus ilumine tudo, para que seja segundo a vontade d’Ele. E não me canso de dizer o quanto sou feliz ao seu lado. Você sempre me fez enxergar a luz no fim do túnel, e essa luz está em você: uma fé enorme e linda, que não se abala por nada, porque sabe que tem um Deus que nunca abandona.",
+    "Eu te admiro, e quero muito que nossos filhos se espelhem em você e vejam a grandeza que você é. Você tinha tudo pra não ser ninguém, mas escolheu ser muito mais do que a vida tinha preparado pra você. Você é a rainha da esperança na minha vida, e ao seu lado sempre vou esperar dias melhores.",
+    "Dedico com muito amor todas essas palavras, digitadas com muito carinho. Nosso casamento é lindo e iluminado por um Senhor que nunca nos deixará sozinhos. Que a gente entregue nossas conquistas a Ele, para que o Espírito Santo ilumine cada uma delas.",
+    "Te amoooo, meu amor! Vamos comemorar a nossa data no mar, onde tudo começou. ❤"
+  ],
+  assinatura: ""  // vazio = sem assinatura extra
+};
+
+/* =====================================================================
+   Daqui para baixo é o funcionamento do site
+   ===================================================================== */
+(function(){
+const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const temIO = "IntersectionObserver" in window;
+if (!reduz && temIO) document.documentElement.classList.add("js");
+else document.documentElement.classList.add("no-anim");
+
+const CORES = ["#ff6b9d","#e63946","#ff8fab","#ffb3c6","#f25c8a","#c9184a"];
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const rnd = (a,b) => a + Math.random()*(b-a);
+const heartSVG = c => `<svg viewBox="0 0 32 29" aria-hidden="true"><path fill="${c}" d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>`;
+document.querySelectorAll("[data-heart]").forEach(el => el.innerHTML = heartSVG(el.dataset.heart));
+
+/* ---- abertura ---- */
+const h1 = document.getElementById("titulo");
+[...CONFIG.titulo].forEach((ch,i) => {
+  const s = document.createElement("span");
+  s.className = ch === " " ? "sp" : "l"; s.textContent = ch === " " ? "" : ch;
+  s.style.setProperty("--i", i); s.setAttribute("aria-hidden","true"); h1.appendChild(s);
+});
+document.getElementById("subtitulo").textContent = CONFIG.subtitulo;
+const casamento = new Date(CONFIG.dataCasamento);
+const pad = n => String(n).padStart(2,"0");
+document.getElementById("data-casamento").textContent = `${pad(casamento.getDate())} · ${pad(casamento.getMonth()+1)} · ${casamento.getFullYear()}`;
+
+/* ---- corações de fundo ---- */
+const bg = document.getElementById("bg-hearts");
+const fx = document.getElementById("fx-layer");
+const MAX_BG = innerWidth < 600 ? 12 : 20;
+function coracaoFundo(){
+  if (document.hidden || bg.childElementCount >= MAX_BG) return;
+  const w = document.createElement("div"); const s = rnd(10,30);
+  w.className = "float";
+  w.style.cssText = `left:${rnd(0,100)}vw;width:${s}px;height:${s}px;--d:${rnd(9,18)}s;--o:${rnd(.25,.7).toFixed(2)}`;
+  w.innerHTML = `<div class="heart" style="width:100%;height:100%;animation-duration:${rnd(2,4).toFixed(1)}s">${heartSVG(pick(CORES))}</div>`;
+  w.addEventListener("animationend", e => { if (e.target === w) w.remove(); });
+  bg.appendChild(w);
+}
+if (!reduz) { for (let i=0;i<4;i++) setTimeout(coracaoFundo, i*400); setInterval(coracaoFundo, 1100); }
+
+/* ---- estouro de corações ---- */
+function estouro(x, y, n=8, dist=70, tam=[10,22], dur=900){
+  if (reduz) n = Math.min(n, 4);
+  if (fx.childElementCount > 160) return;
+  for (let i=0;i<n;i++){
+    const p = document.createElement("div"); const ang = rnd(0, Math.PI*2); const d = rnd(dist*.4, dist);
+    p.className = "pop";
+    p.style.cssText = `left:${x}px;top:${y}px;--s:${rnd(...tam)}px;--dx:${Math.cos(ang)*d}px;--dy:${Math.sin(ang)*d - dist*.3}px;--rot:${rnd(-60,60)}deg;--d:${rnd(dur*.7,dur*1.3)}ms`;
+    p.innerHTML = heartSVG(pick(CORES));
+    p.addEventListener("animationend", () => p.remove());
+    fx.appendChild(p);
+  }
+}
+document.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button !== 0) return; estouro(e.clientX, e.clientY); }, {passive:true});
+
+function chuva(qtd=40, camada=fx){
+  if (reduz) qtd = 8;
+  for (let i=0;i<qtd;i++) setTimeout(() => {
+    if (camada.childElementCount > 160) return;
+    const f = document.createElement("div"); const s = rnd(12,30);
+    f.className = "fall";
+    f.style.cssText = `left:${rnd(0,100)}vw;width:${s}px;height:${s}px;--d:${rnd(4,8)}s;--o:${rnd(.5,.95).toFixed(2)};--rot:${rnd(-180,180)}deg`;
+    f.innerHTML = heartSVG(pick(CORES));
+    f.addEventListener("animationend", () => f.remove());
+    camada.appendChild(f);
+  }, i*rnd(40,90));
+}
+
+/* ---- linha do tempo ---- */
+const tl = document.getElementById("timeline");
+const ehRascunho = t => /\[escreva aqui/i.test(t);
+MEMORIAS.forEach((m, i) => {
+  const art = document.createElement("article");
+  art.className = "mem";
+  const r = (rnd(1.5,4) * (Math.random() < .5 ? -1 : 1)).toFixed(1);
+  art.innerHTML = `
+    <span class="marca">${heartSVG("#ff6b9d")}</span>
+    <div class="foto-wrap fx${i % 4}">
+      <div class="anim">
+        <figure class="pol" style="--r:${r}deg;margin:0 auto" tabindex="0" role="button" aria-label="Ampliar foto: ${m.titulo}">
+          <img src="${m.foto}" alt="${m.titulo}" loading="lazy" decoding="async">
+          <figcaption class="leg">${m.data}</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="txt">
+      <span class="quando" style="--k:0">${m.data}</span>
+      <h3 style="--k:1">${m.titulo}</h3>
+      <p style="--k:2" class="${ehRascunho(m.comentario) ? "ph" : ""}"></p>
+    </div>`;
+  art.querySelector("p").textContent = m.comentario;
+  tl.appendChild(art);
+});
+document.getElementById("x-fotos").textContent = MEMORIAS.length;
+
+if (!reduz && temIO){
+  const io = new IntersectionObserver(ents => ents.forEach(en => {
+    if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  }), {threshold: .22, rootMargin: "0px 0px -8% 0px"});
+  document.querySelectorAll(".mem").forEach(el => io.observe(el));
+} else document.querySelectorAll(".mem").forEach(el => el.classList.add("in"));
+
+/* ---- lightbox ---- */
+function abrirFoto(src, legenda){
+  const lb = document.createElement("div");
+  lb.className = "lb"; lb.setAttribute("role","dialog"); lb.setAttribute("aria-label","Foto ampliada");
+  lb.innerHTML = `<div><img alt=""><p></p></div>`;
+  lb.querySelector("img").src = src; lb.querySelector("img").alt = legenda; lb.querySelector("p").textContent = legenda;
+  const fechar = () => { lb.classList.remove("open"); setTimeout(() => lb.remove(), 300); document.removeEventListener("keydown", esc); };
+  const esc = e => { if (e.key === "Escape") fechar(); };
+  lb.addEventListener("click", fechar); document.addEventListener("keydown", esc);
+  document.body.appendChild(lb); requestAnimationFrame(() => lb.classList.add("open"));
+}
+tl.addEventListener("click", e => {
+  const pol = e.target.closest(".pol"); if (!pol) return;
+  const img = pol.querySelector("img"); abrirFoto(img.src, img.alt);
+});
+tl.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("pol")){ e.preventDefault(); e.target.click(); }
+});
+
+/* ---- contagem e contador ---- */
+const final = document.getElementById("final");
+const numEl = document.getElementById("num");
+const contador = document.getElementById("contador");
+let comecou = false;
+
+function tempoJuntos(){
+  const agora = new Date();
+  let a = agora.getFullYear() - casamento.getFullYear();
+  let m = agora.getMonth() - casamento.getMonth();
+  let d = agora.getDate() - casamento.getDate();
+  const base = new Date(casamento);
+  // calcula anos/meses/dias completos e o resto em h/m/s
+  let marco = new Date(base); marco.setFullYear(base.getFullYear() + a);
+  if (marco > agora){ a--; }
+  marco = new Date(base); marco.setFullYear(base.getFullYear() + a);
+  let meses = 0;
+  while (true){ const t = new Date(marco); t.setMonth(t.getMonth() + meses + 1); if (t > agora) break; meses++; }
+  marco.setMonth(marco.getMonth() + meses);
+  let resto = agora - marco;
+  const dias = Math.floor(resto / 864e5); resto -= dias*864e5;
+  const horas = Math.floor(resto / 36e5); resto -= horas*36e5;
+  const min = Math.floor(resto / 6e4); resto -= min*6e4;
+  const seg = Math.floor(resto / 1e3);
+  const total = Math.floor((agora - casamento) / 864e5);
+  return {anos:a, meses, dias, horas, min, seg, total};
+}
+const ids = {anos:"c-anos",meses:"c-meses",dias:"c-dias",horas:"c-horas",min:"c-min",seg:"c-seg",total:"x-dias"};
+const fmt = n => n.toLocaleString("pt-BR");
+function mostrar(t, fator=1){ for (const k in ids) document.getElementById(ids[k]).textContent = fmt(Math.round(t[k]*fator)); }
+
+function sobeNumeros(){
+  const alvo = tempoJuntos(); const dur = reduz ? 1 : 2200; const t0 = performance.now();
+  (function passo(now){
+    const p = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(1 - p, 3);
+    mostrar(alvo, e);
+    if (p < 1) requestAnimationFrame(passo);
+    else { mostrar(tempoJuntos()); setInterval(() => mostrar(tempoJuntos()), 1000); }
+  })(t0);
+}
+
+function contagem(){
+  if (comecou) return; comecou = true;
+  final.classList.add("go");
+  const seq = ["3","2","1"]; let i = 0;
+  const prox = () => {
+    if (i < seq.length){ numEl.innerHTML = `<span>${seq[i]}…</span>`; i++; setTimeout(prox, reduz ? 400 : 1100); return; }
+    numEl.innerHTML = ""; numEl.style.height = "0";
+    const r = numEl.getBoundingClientRect();
+    estouro(innerWidth/2, r.top || innerHeight/2, reduz ? 6 : 46, Math.min(innerWidth, 700)*.55, [14,34], 1600);
+    chuva(36);
+    contador.hidden = false; contador.classList.add("show");
+    sobeNumeros();
+  };
+  setTimeout(prox, reduz ? 200 : 1300);
+}
+if (temIO){
+  new IntersectionObserver((ents, obs) => ents.forEach(en => {
+    if (en.isIntersecting){ contagem(); obs.disconnect(); }
+  }), {threshold: .45}).observe(final);
+} else contagem();
+
+/* ---- carta ---- */
+let chuvaCarta = null;
+function abrirCarta(){
+  const ov = document.createElement("div");
+  ov.className = "carta-ov"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Carta");
+  ov.innerHTML = `<div class="envelope" id="env">
+      <div class="env-corpo"></div>
+      <div class="env-papel">Para você ♥</div>
+      <div class="env-frente"></div>
+      <div class="env-aba"></div>
+      <div class="env-selo">${heartSVG("#e63946")}</div>
+    </div>`;
+  document.body.appendChild(ov); document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => ov.classList.add("open"));
+  const env = ov.querySelector("#env"); const T = reduz ? 0 : 1;
+  setTimeout(() => env.classList.add("abrindo"), 500*T);
+  setTimeout(() => env.classList.add("saindo"), 1200*T);
+  setTimeout(() => { env.classList.add("some"); chuva(28); mostrarFolha(ov); }, 2200*T);
+}
+function mostrarFolha(ov){
+  const folha = document.createElement("div");
+  folha.className = "folha gutter"; folha.setAttribute("role","dialog"); folha.setAttribute("aria-label","Carta de amor");
+  const ps = CARTA.paragrafos.map(p => `<p class="${ehRascunho(p) ? "ph" : ""}"></p>`).join("");
+  folha.innerHTML = `<button class="fechar-x" type="button" aria-label="Fechar carta">×</button>
+    <div class="folha-in"><h2></h2>${ps}<p class="assinatura"></p>
+    <div class="acoes"><button type="button" class="pri" data-a="reler">Ler de novo</button><button type="button" data-a="fechar">Fechar</button></div></div>`;
+  const h2 = folha.querySelector("h2"); if (CARTA.saudacao) h2.textContent = CARTA.saudacao; else h2.remove();
+  let pEls = folha.querySelectorAll(".folha-in p");
+  CARTA.paragrafos.forEach((t,i) => pEls[i].textContent = t);
+  const ass = pEls[pEls.length-1]; if (CARTA.assinatura) ass.textContent = CARTA.assinatura; else ass.remove();
+  document.body.appendChild(folha);
+  pEls = folha.querySelectorAll(".folha-in p");
+  const camada = document.createElement("div"); camada.id = "carta-hearts";
+  camada.style.cssText = "position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:165";
+  document.body.appendChild(camada);
+  requestAnimationFrame(() => folha.classList.add("open"));
+
+  const revelar = () => {
+    pEls.forEach(p => p.classList.remove("vis")); folha.querySelector(".acoes").classList.remove("vis");
+    folha.scrollTop = 0;
+    pEls.forEach((p,i) => setTimeout(() => p.classList.add("vis"), (reduz ? 0 : 900) + i*(reduz ? 0 : 1400)));
+    setTimeout(() => folha.querySelector(".acoes").classList.add("vis"), (reduz ? 0 : 900) + pEls.length*(reduz ? 0 : 1400));
+  };
+  revelar();
+  if (!reduz){
+    chuvaCarta = setInterval(() => {
+      if (camada.childElementCount > 14) return;
+      const f = document.createElement("div"); const s = rnd(10,22);
+      f.className = "fall";
+      f.style.cssText = `left:${rnd(0,100)}vw;width:${s}px;height:${s}px;--d:${rnd(7,12)}s;--o:${rnd(.2,.5).toFixed(2)};--rot:${rnd(-120,120)}deg`;
+      f.innerHTML = heartSVG(pick(CORES)); f.addEventListener("animationend", () => f.remove()); camada.appendChild(f);
+    }, 700);
+  }
+  const fechar = () => {
+    clearInterval(chuvaCarta); folha.classList.remove("open"); ov.classList.remove("open");
+    setTimeout(() => { folha.remove(); ov.remove(); camada.remove(); document.body.style.overflow = ""; }, 600);
+    document.removeEventListener("keydown", esc);
+    document.getElementById("btn-msg").focus();
+  };
+  const esc = e => { if (e.key === "Escape") fechar(); };
+  document.addEventListener("keydown", esc);
+  folha.querySelector(".fechar-x").addEventListener("click", fechar);
+  folha.querySelector('[data-a="fechar"]').addEventListener("click", fechar);
+  folha.querySelector('[data-a="reler"]').addEventListener("click", () => { chuva(25); revelar(); });
+  folha.querySelector(".fechar-x").focus({preventScroll:true});
+}
+document.getElementById("btn-msg").addEventListener("click", abrirCarta);
+
+/* ---- música (opcional) ---- */
+if (CONFIG.musica){
+  const audio = new Audio(CONFIG.musica); audio.loop = true;
+  const b = document.createElement("button");
+  b.className = "musica"; b.type = "button"; b.textContent = "🎵"; b.setAttribute("aria-label","Tocar ou pausar a música");
+  b.addEventListener("click", e => { e.stopPropagation(); if (audio.paused){ audio.play().catch(()=>{}); } else audio.pause(); });
+  audio.addEventListener("play", () => b.classList.add("tocando"));
+  audio.addEventListener("pause", () => b.classList.remove("tocando"));
+  document.body.appendChild(b);
+  const primeiro = () => { audio.play().catch(()=>{}); document.removeEventListener("pointerdown", primeiro); };
+  document.addEventListener("pointerdown", primeiro);
+}
+})();
+</script>
+
+</body>
+</html>
