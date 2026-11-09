@@ -57,7 +57,7 @@ button:focus-visible,img:focus-visible{outline:3px solid var(--dourado);outline-
 .hero .sub{font-family:var(--f-sub);font-size:clamp(1.35rem,5.4vw,2rem);line-height:1.3;max-width:24ch;opacity:0;animation:aparece 1s ease 1.5s forwards}
 .hero .data{font-family:var(--f-mao);font-size:1.6rem;color:var(--mar);background:rgba(255,248,240,.85);padding:2px 18px;border-radius:999px;opacity:0;animation:aparece 1s ease 2s forwards;font-variant-numeric:tabular-nums}
 @keyframes aparece{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.seta{position:absolute;z-index:3;left:50%;bottom:calc(36px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:grid;justify-items:center;gap:4px;color:var(--creme);text-decoration:none;font-family:var(--f-mao);font-size:1.35rem;opacity:0;animation:aparece 1s ease 2.6s forwards}
+.seta{position:absolute;z-index:3;left:0;right:0;margin-inline:auto;width:max-content;bottom:calc(36px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:4px;text-align:center;color:var(--creme);text-decoration:none;font-family:var(--f-mao);font-size:1.35rem;opacity:0;animation:aparece 1s ease 2.6s forwards}
 .seta svg{width:28px;height:28px;animation:pulsa-seta 1.6s ease-in-out infinite}
 @keyframes pulsa-seta{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(8px);opacity:1}}
 .ondas{position:absolute;left:0;right:0;bottom:-1px;height:120px;z-index:2;pointer-events:none}
@@ -248,48 +248,44 @@ button:focus-visible,img:focus-visible{outline:3px solid var(--dourado);outline-
 const CONFIG = {
   titulo: "2 Anos de Nós",
   subtitulo: "Um ano inteiro de momentos que guardo no coração",
-  dataCasamento: "2024-11-08T00:00:00", // ano-mês-dia
+  dataCasamento: "2024-11-09T00:00:00", // ano-mês-dia
   musica: "" // ex.: "musica.mp3" (arquivo ao lado do index.html). Vazio = sem botão de música.
 };
 
 // Ordem cronológica. "comentario" com [escreva aqui] aparece como rascunho até você trocar.
 const MEMORIAS = [
-  { foto: "fotos/01.jpg", data: "Novembro 2025",  titulo: "Nosso 1º aniversário",      comentario: "[escreva aqui]" },
-  { foto: "fotos/02.jpg", data: "Dezembro 2025",  titulo: "Arrumados para celebrar",   comentario: "[escreva aqui]" },
-  { foto: "fotos/03.jpg", data: "Dezembro 2025",  titulo: "Réveillon de branco",       comentario: "[escreva aqui]" },
-  { foto: "fotos/04.jpg", data: "Janeiro 2026",   titulo: "Primeiro dia do ano",       comentario: "[escreva aqui]" },
-  { foto: "fotos/05.jpg", data: "Janeiro 2026",   titulo: "Sorrisos de janeiro",       comentario: "[escreva aqui]" },
-  { foto: "fotos/06.jpg", data: "Fevereiro 2026", titulo: "Uma noite de gala",         comentario: "[escreva aqui]" },
-  { foto: "fotos/07.jpg", data: "Fevereiro 2026", titulo: "Carnaval juntos",           comentario: "[escreva aqui]" },
-  { foto: "fotos/08.jpg", data: "Fevereiro 2026", titulo: "Ainda é Carnaval",          comentario: "[escreva aqui]" },
-  { foto: "fotos/09.jpg", data: "Fevereiro 2026", titulo: "Um vinho a dois",           comentario: "[escreva aqui]" },
-  { foto: "fotos/10.jpg", data: "Abril 2026",     titulo: "Passeio de domingo",        comentario: "[escreva aqui]" },
-  { foto: "fotos/11.jpg", data: "Abril 2026",     titulo: "Jantar de abril",           comentario: "[escreva aqui]" },
-  { foto: "fotos/12.jpg", data: "Junho 2026",     titulo: "Dia de sol",                comentario: "[escreva aqui]" },
-  { foto: "fotos/13.jpg", data: "Junho 2026",     titulo: "Torcendo pelo Brasil",      comentario: "[escreva aqui]" },
-  { foto: "fotos/14.jpg", data: "Junho 2026",     titulo: "De azul também vale",       comentario: "[escreva aqui]" },
-  { foto: "fotos/15.jpg", data: "Junho 2026",     titulo: "Almoço a dois",             comentario: "[escreva aqui]" },
-  { foto: "fotos/16.jpg", data: "Junho 2026",     titulo: "Prontos para sair",         comentario: "[escreva aqui]" },
-  { foto: "fotos/17.jpg", data: "Julho 2026",     titulo: "Minha torcedora favorita",  comentario: "[escreva aqui]" },
-  { foto: "fotos/18.jpg", data: "Julho 2026",     titulo: "Rumo ao hexa",              comentario: "[escreva aqui]" },
-  { foto: "fotos/19.jpg", data: "Julho 2026",     titulo: "Lembra de um ano atrás?",   comentario: "[escreva aqui]" },
-  { foto: "fotos/20.jpg", data: "Julho 2026",     titulo: "Noite especial",            comentario: "[escreva aqui]" },
-  { foto: "fotos/21.jpg", data: "Julho 2026",     titulo: "Fim de tarde",              comentario: "[escreva aqui]" },
-  { foto: "fotos/22.jpg", data: "Julho 2026",     titulo: "Momentos em família",       comentario: "[escreva aqui]" },
-  { foto: "fotos/23.jpg", data: "Julho 2026",     titulo: "Mais um sorriso seu",       comentario: "[escreva aqui]" },
+  { foto: "fotos/01.jpg", data: "Novembro 2025",  titulo: "Nosso 1º aniversário",      comentario: "Uma viagem que tinha tudo pra não dar certo, mas você sempre me ensinou a nunca desistir e que nossa data é a mais especial!" },
+  { foto: "fotos/02.jpg", data: "Dezembro 2025",  titulo: "Arrumados para celebrar",   comentario: "Nesse dia aprendi mais que nunca, que nada importa a não ser você. Poderia quebrar mais 1000 portas, eu pagaria sem receio algum. O que não posso perder é você na minha vida!" },
+  { foto: "fotos/03.jpg", data: "Dezembro 2025",  titulo: "Réveillon Familiar",       comentario: "Hoje reflito sobre esse dia, o que adianta está rodeado da família, se essa não é amor quando mais precisamos, e quando menos imaginamos, somos escolhidos para sermos maltradados nas palavras! \n\n A minha família é você, e sempre serei grato por partilhar cada momento ao seu lado." },
+  { foto: "fotos/04.jpg", data: "Janeiro 2026",   titulo: "Primeiro dia do ano",       comentario: "Aqui foi o choque de realidade na minha vida, descobrir que tinha que reacender o amor no meu coração, e que amar não é sobre palavras, e sim sobre gestos. Fui falho, mas escolhi amar ao ponto, de refletir sobre minha postura, e achar no meu coração, tudo aquilo que demorei anos pra conquistar, pq hoje você preenche meu coração inteiramente. " },
+  { foto: "fotos/05.jpg", data: "Janeiro 2026",   titulo: "Sorrisos de janeiro",       comentario: "" },
+  { foto: "fotos/06.jpg", data: "Fevereiro 2026", titulo: "Uma noite de gala",         comentario: "Dia de refletir sobre o que é o casamento e sua comemoração, e nosso papel como cristão casados na vida de outras pessoas. Dedicar o seu amor a outra pessoa, exige maturidade e escolhar própria, isso significa que primeiro de tudo, deve ser sua vontade, professar o amor na frente do senhor!" },
+  { foto: "fotos/07.jpg", data: "Fevereiro 2026", titulo: "Carnaval juntos",           comentario: "Você me faz viver várias provas de amor, e uma delas foi nesse dia. Tinha tudo pra você ficar em casa, mas escolheu está ao meu lado, celebrando minhas conquistas, e mesmo com tantos momentos de aflição, você não largou um minuto se quer o seu sorriso! Por isso não canso de dizer, que seu sorriso é como infinito, por mais profundo que eu esteja navegando sempre vou encontrar ele!" },
+  { foto: "fotos/09.jpg", data: "Fevereiro 2026", titulo: "Um vinho a dois sempre no nosso restaurante",           comentario: "" },
+  { foto: "fotos/10.jpg", data: "Abril 2026",     titulo: "Formando laços com cristo",        comentario: "Aqui dedicamos o nosso amor a cristo, abrançando uma missão muito dificil, mas que é vivência de fé na igreja. Escolhemos não só cuidar e caminhar junto na fé com uma criança, mas também sermos luz, conduzindo sempre para o caminho que Jesus nos deixou, doando a sua vida por cada um de nós. " },
+  { foto: "fotos/11.jpg", data: "Abril 2026",     titulo: "Jantar de comemoração",           comentario: "" },
+  { foto: "fotos/12.jpg", data: "Junho 2026",     titulo: "Dia de sol",                comentario: "Aqui digo que foi um dia mais que especial, viver ao seu lado cada passo dessa caminhada, e descobrir que tenho uma mulher perfeita, que está sempre disposta a mim acompanhar para qualquer lugar. " },
+  { foto: "fotos/13.jpg", data: "Junho 2026",     titulo: "Torcendo pelo Brasil",      comentario: "O fim não foi o que esperamos, mas foi muito bom comer cada churrasco ao seu lado. Celebrando sempre o amor que plantamos em nossa casa." },
+  { foto: "fotos/15.jpg", data: "Junho 2026",     titulo: "Almoço a dois",             comentario: "É incrível como você topa tudo, chamei e você foi sem pensar duas vezes." },
+  { foto: "fotos/16.jpg", data: "Junho 2026",     titulo: "Sempre tão linda",         comentario: "" },
+  { foto: "fotos/18.jpg", data: "Julho 2026",     titulo: "Rumo ao hexa do amor",              comentario: "" },
+  { foto: "fotos/20.jpg", data: "Julho 2026",     titulo: "Consquistas, só vale se for comemorada!",            comentario: "" },
+  { foto: "fotos/22.jpg", data: "Julho 2026",     titulo: "Compromisso com nossa missão de educar na fé!",       comentario: "" },
+  { foto: "fotos/23.jpg", data: "Julho 2026",     titulo: "Mulher linda, e muito elegante",       comentario: "" },
   { foto: "fotos/24.jpg", data: "Agosto 2026",    titulo: "Noites leves",              comentario: "[escreva aqui]" },
   { foto: "fotos/25.jpg", data: "Agosto 2026",    titulo: "Mergulho a dois",           comentario: "[escreva aqui]" },
-  { foto: "fotos/26.jpg", data: "Agosto 2026",    titulo: "Lado a lado",               comentario: "[escreva aqui]" },
-  { foto: "fotos/27.jpg", data: "Setembro 2026",  titulo: "Minha paisagem favorita",   comentario: "[escreva aqui]" },
-  { foto: "fotos/28.jpg", data: "Setembro 2026",  titulo: "Um abraço que é casa",      comentario: "[escreva aqui]" },
-  { foto: "fotos/29.jpg", data: "2026",           titulo: "Um encontro bonito",        comentario: "[escreva aqui]" }
+  { foto: "fotos/26.jpg", data: "Agosto 2026",    titulo: "Tentando correr pra ter saúde",               comentario: "[escreva aqui]" },
+  { foto: "fotos/27.jpg", data: "Setembro 2026",  titulo: "Minha paisagem favorita",   comentario: "Você me ama até quando não é possível. Tenta me entender, mesmo quando eu não entendo a mim mesmo. Faz com que tudo vire flor, onde só existe deserto. Por isso sou eternamente grato por cada gesto de amor seu." },
+  { foto: "fotos/28.jpg", data: "Setembro 2026",  titulo: "Vejo que tudo que posso esperar de você, é definido em uma palavra: AMOR",      comentario: "" },
+  { foto: "fotos/29.jpg", data: "2026",           titulo: "Amo cada momento ao seu lado",        comentario: "" }
 ];
 
 // A carta: cole o seu texto exatamente como quiser, um item por parágrafo.
 const CARTA = {
   saudacao: "",   // vazio = sem saudação extra (a carta abaixo é o texto original, sem alterações)
   paragrafos: [
-    "Começo dizendo que nunca imaginei viver tão feliz ao lado de alguém. Hoje faz 2 anos que, diante do Senhor, escolhi eternizar a minha vida ao lado de uma só mulher. Deus nos dá o dom da vida para que sejamos felizes e eternamente gratos por tudo o que Ele realiza em nós.",
+    "Preparei essa carta com muito amor para você, e dediquei ela com uma pedacinho do meu profissional. ",
+    "E quero começar dizendo que nunca imaginei viver tão feliz ao lado de alguém. Hoje faz 2 anos que, diante do Senhor, escolhi eternizar a minha vida ao lado de uma só mulher. Deus nos dá o dom da vida para que sejamos felizes e eternamente gratos por tudo o que Ele realiza em nós.",
     "Confesso que, neste último ano, enfrentei dilúvios de dificuldades: ansiedades, anseios, aflições, mágoas, baixa autoestima e tantos outros males que me afetaram. Mesmo assim, só tenho a agradecer, porque em nenhum momento você me abandonou. Por mais difíceis que fossem algumas situações, você sempre foi a esposa que nunca me deixou sozinho. Sempre disposta a fazer de tudo pelo nosso casamento, a ponto de enfrentar seus medos, seus traumas e seus gatilhos para ser uma esposa que acolhe, que luta e que escolhe amar, mesmo quando tudo parece dizer o contrário.",
     "Quero te dizer que tenho minhas fraquezas e meus defeitos, mas estou sempre disposto a ser mais forte para ver o nosso casamento se eternizar. Quero te dizer que, mesmo no silêncio, eu te amo. Mesmo nas horas de aflição, eu te amo. Mesmo distante, eu te amo ainda mais. Mesmo quando você não olha pra mim e fica no seu cantinho, eu te amo mil vezes. E mesmo quando você está emburrada comigo, eu ainda te amo. Porque o meu amor sempre vai ser seu, independente de qualquer condição ou realidade. Vou te honrar até o fim da minha vida, vou cuidar de você e te escolher antes de mim, todos os dias.",
     "Estamos perto de duas grandes conquistas no nosso casamento: a nossa casa e o nosso carro (um Fusca, kkkk). Que Deus ilumine tudo, para que seja segundo a vontade d’Ele. E não me canso de dizer o quanto sou feliz ao seu lado. Você sempre me fez enxergar a luz no fim do túnel, e essa luz está em você: uma fé enorme e linda, que não se abala por nada, porque sabe que tem um Deus que nunca abandona.",
